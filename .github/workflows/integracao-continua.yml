@@ -34,8 +34,11 @@ jobs:
     - name: Executa testes unitários
       run: mvn -B verify
 
+    - name: Gera relatorio Jacoco
+      run: mvn jacoco:prepare-agent verify
+      
     - name: Analise estatica
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=flpp-oliveira_vollmed-api
+      run: mvn sonar:sonar -Dsonar.projectKey=flpp-oliveira_vollmed-api
        
