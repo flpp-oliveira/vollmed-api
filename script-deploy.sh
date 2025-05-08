@@ -1,15 +1,15 @@
 #! /bin/bash
-
+set -x
 docker load -i vollmed-api.tar
 
 mv docker-compose-prod.yaml docker-compose.yaml
 
 container_ids=$(docker ps -q)
 
-if [ -z "$containar_ids" ]; then
+if [ -z "$container_ids" ]; then
   echo "Não há containers em execução"
 else
-  for container_id in $$containar_ids; do
+  for container_id in $containar_ids; do
     echo "Parando container: $container_id"
     docker stop $container_id
   done
